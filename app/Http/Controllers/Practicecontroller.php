@@ -23,7 +23,7 @@ class Practicecontroller extends Controller
     public function index()
     {
         $data = Form::all();
-        return view('welcome', compact('data'));
+        return view('form', compact('data'));
         //append
         // $collection = collect(['name' => 'vivek', 'age' => 23]);
         // $append = $collection-append(['city'=>'nadiad']); //not work
@@ -264,7 +264,10 @@ class Practicecontroller extends Controller
         // return dd($styles);
         // 'color: red; font-weight: bold;'
     }
-    public function index2()
+    public function fakeData(){
+        return view('fakeData');
+    }
+    public function arrayFunctions()
     {
 
         //Arr::undot
@@ -311,11 +314,12 @@ class Practicecontroller extends Controller
         ]);
         // event(new Welcome($userData));
         return redirect()->back();
+        // return view('welcome', compact('formdata'))->back();
     }
 
     public function importCSV()
     {
-        return view('welcome');
+        return view('csv');
     }
     public function uploadCSV(Request $request)
     {

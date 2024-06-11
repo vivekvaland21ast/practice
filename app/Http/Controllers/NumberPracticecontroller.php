@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Profiles;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Number;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 
 class NumberPracticecontroller extends Controller
 {
@@ -159,4 +162,204 @@ class NumberPracticecontroller extends Controller
         echo $previousDate . "<br>"; // Output: 2024-04-04 15:30:00
 
     }
+
+    public function string()
+    {
+
+        $trim = Str::of('      Laravel      world    hello       ')->trim();
+
+        $squish = Str::of('        Laravel          world   hello      ')->squish();
+
+        // $tap = Str::of('Laravel')
+        //     ->append(' Framework')
+        //     ->tap(function (Stringable $string) {
+        //         dump('String after append: ' . $string);
+        //     })
+        //     ->upper();
+
+        $strip = Str::of('<a href="https://laravel.com">Taylor <b>Otwell</b></a>')->stripTags('<b>');
+
+        echo $trim . "<br>";
+        echo $squish . "<br>";
+        // echo $tap . "<br>";
+        echo $strip . "<br>";
+
+    }
+
+    public function array()
+    {
+        $array = ['products' => ['desk' => ['price' => 100]]];
+        $dot = Arr::dot($array);
+
+        $divide = [$keys, $values] = Arr::divide(['name' => 'Desk']);
+
+        $array = [100, 200, 300];
+
+        $first = Arr::first($array, function (int $value, int $key) {
+            return $value == 100;
+        });
+
+        $array = ['name' => 'Joe', 'languages' => ['PHP', 'Ruby']];
+        $flattened = Arr::flatten($array);
+
+        $array = ['product' => ['name' => 'Desk', 'price' => 100]];
+        $has = Arr::has($array, ['product.price']);
+
+        $array = ['Tailwind', 'Alpine', 'Laravel', 'Livewire'];
+        $joined = Arr::join($array, ', ', ' and ');
+
+        $array = [
+            ['product_id' => 'prod-100', 'name' => 'Desk'],
+            ['product_id' => 'prod-100', 'name' => 'Chair'],
+        ];
+        $keyed = Arr::keyBy($array, 'product_id');
+
+        $array = ['first' => 'james', 'last' => 'kirk'];
+        $mapped = Arr::map($array, function (string $value, string $key) {
+            return ucfirst($value);
+        });
+
+        $array = [
+            [0, 1],
+            [2, 3],
+            [4, 5],
+            [6, 7],
+            [8, 9],
+        ];
+        $mapped1 = Arr::mapSpread($array, function (int $even, int $odd) {
+            return $even + $odd;
+        });
+
+        $array = [
+            ['developer' => ['id' => 1, 'name' => 'Taylor']],
+            ['developer' => ['id' => 2, 'name' => 'Abigail']],
+        ];
+        $pluck = Arr::pluck($array, 'developer.name');
+        $pluck1 = Arr::pluck($array, 'developer.name', 'developer.id');
+
+        $array = ['price' => 100];
+        $prepend = Arr::prepend($array, 'Desk', 'name');
+
+        $array = [
+            'name' => 'Taylor',
+            'order' => [
+                'column' => 'created_at',
+                'direction' => 'desc'
+            ]
+        ];
+        $query = Arr::query($array);
+
+        $array = [1, 2, 3, 4, 5];
+        $random = Arr::random($array, 2);
+
+        $array = [
+            ['Roman', 'Taylor', 'Li'],
+            ['PHP', 'Ruby', 'JavaScript'],
+            ['one' => 1, 'two' => 2, 'three' => 3],
+        ];
+        $sorted = Arr::sortRecursive($array);
+
+        $isActive = false;
+        $hasError = true;
+        $array = ['p-4', 'font-bold' => $isActive, 'bg-red' => $hasError];
+        $classes = Arr::toCssClasses($array);
+
+        $array = [
+            'user.name' => 'Kevin Malone',
+            'user.occupation' => 'Accountant',
+        ];
+        $undot = Arr::undot($array);
+
+        $array = [100, '200', 300, '400', 500];
+        $filtered = Arr::where($array, function (string|int $value, int $key) {
+            return is_string($value);
+        });
+
+        $data = ['products' => ['desk' => ['price' => 100]]];
+        data_set($data, 'products.desk.price', 200);
+        data_fill($data, 'products.desk.discount', 10);
+
+        print_r($data);
+        echo "<br>";
+        print_r($filtered);
+        echo "<br>";
+        print_r($undot);
+        echo "<br>";
+        print_r($classes);
+        echo "<br>";
+        print_r($sorted);
+        echo "<br>";
+        print_r($random);
+        echo "<br>";
+        print_r($query);
+        echo "<br>";
+        print_r($prepend);
+        echo "<br>";
+        print_r($pluck1);
+        echo "<br>";
+        print_r($pluck);
+        echo "<br>";
+        print_r($mapped1);
+        echo "<br>";
+        print_r($mapped);
+        echo "<br>";
+        print_r($keyed);
+        echo "<br>";
+        print_r($joined);
+        echo "<br>";
+        print_r($has);
+        echo "<br>";
+        print_r($flattened);
+        echo "<br>";
+        print_r($first);
+        echo "<br>";
+        print_r($divide);
+        echo "<br>";
+        print_r($dot);
+    }
+
+    public function number()
+    {
+        $number = Number::clamp(20, min: 10, max: 100);
+        // $currency = Number::currency(1000, in: 'INR');
+        // $number = Number::ordinal(21);
+        // $number = Number::spell(10, until: 10);
+
+        // print_r($number);
+        // echo "<br>";
+        // print_r($number);
+        // echo "<br>";
+        // print_r($currency);
+        // echo "<br>";
+        print_r($number);
+        echo "<br>";
+    }
+
+    public function url()
+    {
+        $url = action([NumberPracticecontroller::class, 'url']);
+        $route = route('url');
+
+        print_r($route);
+        echo "<br>";
+        print_r($url);
+        echo "<br>";
+    }
 }
+class NumberService extends NumberPracticecontroller
+{
+    public function all(): array
+    {
+        return once(fn() => [1, 2, 3]);
+    }
+}
+
+// $service = new NumberService;
+
+// $service->all();
+// $service->all(); // (cached result)
+
+// $secondService = new NumberService;
+
+// $secondService->all();
+// $secondService->all(); // (cached result)

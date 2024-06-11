@@ -33,7 +33,7 @@
         <div class="flex">
             <!-- Form -->
             <div class="w-1/2 p-5">
-                {{-- <form action="{{ route('store') }}" method="POST">
+                <form action="{{ route('store') }}" method="POST">
                     @csrf
                     <div class="relative z-0 w-full mb-5 group">
                         <input type="email" name="email" id="email"
@@ -63,43 +63,10 @@
                     </div>
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-                </form> --}}
-                <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <h1 class="text-lg">Import data from .csv file</h1>
-                    <div class="w-1/2 p-5 mt-4">
-                        <input type="file" name="csvFile"
-                            class="file-input file-input-bordered file-input-primary w-full max-w-xs" />
-                    </div>
-                    @if (session('success'))
-                        {{-- <h1 class="text-mg text-green-500">{{session('success')}}</h1> --}}
-                        <script>
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 4000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.onmouseenter = Swal.stopTimer;
-                                    toast.onmouseleave = Swal.resumeTimer;
-                                }
-                            });
-                            Toast.fire({
-                                icon: "info",
-                                title: "Your file will be imported in few seconds"
-                            });
-                        </script>
-                    @endif
-                    <div class="w-1/2 p-5">
-                        <button type="submit"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Import</button>
-                    </div>
                 </form>
             </div>
-
             <!-- Table -->
-            {{-- <div class="w-1/2 p-5">
+            <div class="w-1/2 p-5">
                 <h1 class="text-2xl font-bold mb-5">Entries</h1>
                 <div class="scrollable border">
                     <table class="table-auto w-full">
@@ -125,7 +92,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </body>
